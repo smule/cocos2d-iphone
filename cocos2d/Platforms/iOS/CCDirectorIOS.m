@@ -409,11 +409,15 @@ CGFloat	__ccContentScaleFactor = 1;
 
 - (void)didReceiveMemoryWarning
 {
-	// Release any cached data, images, etc that aren't in use.
-	[super purgeCachedData];
+    // if we're not running, then don't purge anything...
+    if (view_ != nil)
+    {
+        // Release any cached data, images, etc that aren't in use.
+        [super purgeCachedData];
 
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+        // Releases the view if it doesn't have a superview.
+        [super didReceiveMemoryWarning];
+    }
 }
 
 -(void) viewDidLoad
