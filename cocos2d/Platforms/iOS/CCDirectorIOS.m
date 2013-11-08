@@ -478,7 +478,7 @@ CGFloat	__ccContentScaleFactor = 1;
 
 #else
 	// setup DisplayLink in main thread
-	[displayLink_ addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+	[displayLink_ addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
 #endif
 
     isAnimating_ = YES;
@@ -537,7 +537,7 @@ CGFloat	__ccContentScaleFactor = 1;
 {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
-	[displayLink_ addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+	[displayLink_ addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
 
 	// start the run loop
 	[[NSRunLoop currentRunLoop] run];
