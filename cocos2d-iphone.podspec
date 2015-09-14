@@ -16,6 +16,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '5.0'
   s.ios.deployment_target = '5.0'
   s.preferred_dependency = 'cocos2d'
+  s.requires_arc = false
 
   s.subspec 'kazmath' do |kazmath|
     kazmath.source_files = 'external/kazmath/**/*.{h,c}'
