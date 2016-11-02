@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * Returns KM_TRUE if point is in the specified AABB, returns
  * KM_FALSE otherwise.
  */
-const int kmAABBContainsPoint(const kmVec3* pPoint, const kmAABB* pBox)
+ int kmAABBContainsPoint(const kmVec3* pPoint, const kmAABB* pBox)
 {
     if(pPoint->x >= pBox->min.x && pPoint->x <= pBox->max.x &&
        pPoint->y >= pBox->min.y && pPoint->y <= pBox->max.y &&
@@ -43,7 +43,7 @@ const int kmAABBContainsPoint(const kmVec3* pPoint, const kmAABB* pBox)
 /**
  * Assigns pIn to pOut, returns pOut.
  */
-kmAABB* const kmAABBAssign(kmAABB* pOut, const kmAABB* pIn)
+kmAABB*  kmAABBAssign(kmAABB* pOut, const kmAABB* pIn)
 {
     kmVec3Assign(&pOut->min, &pIn->min);
     kmVec3Assign(&pOut->max, &pIn->max);
@@ -53,7 +53,7 @@ kmAABB* const kmAABBAssign(kmAABB* pOut, const kmAABB* pIn)
 /**
  * Scales pIn by s, stores the resulting AABB in pOut. Returns pOut
  */
-kmAABB* const kmAABBScale(kmAABB* pOut, const kmAABB* pIn, kmScalar s)
+kmAABB*  kmAABBScale(kmAABB* pOut, const kmAABB* pIn, kmScalar s)
 {
 	assert(0 && "Not implemented");
 	return 0;

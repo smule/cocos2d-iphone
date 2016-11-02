@@ -32,21 +32,21 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "kazmath/mat3.h"
 #include "kazmath/quaternion.h"
 
-kmMat3* const kmMat3Fill(kmMat3* pOut, const kmScalar* pMat)
+kmMat3* kmMat3Fill(kmMat3* pOut, const kmScalar* pMat)
 {
     memcpy(pOut->mat, pMat, sizeof(kmScalar) * 9);
     return pOut;
 }
 
 /** Sets pOut to an identity matrix returns pOut*/
-kmMat3* const kmMat3Identity(kmMat3* pOut)
+kmMat3* kmMat3Identity(kmMat3* pOut)
 {
 	memset(pOut->mat, 0, sizeof(float) * 9);
 	pOut->mat[0] = pOut->mat[4] = pOut->mat[8] = 1.0f;
 	return pOut;
 }
 
-const kmScalar kmMat3Determinant(const kmMat3* pIn)
+ kmScalar kmMat3Determinant(const kmMat3* pIn)
 {
     kmScalar output;
     /*
@@ -65,7 +65,7 @@ const kmScalar kmMat3Determinant(const kmMat3* pIn)
 }
 
 
-kmMat3* const kmMat3Adjugate(kmMat3* pOut, const kmMat3* pIn)
+kmMat3* kmMat3Adjugate(kmMat3* pOut, const kmMat3* pIn)
 {
     pOut->mat[0] = pIn->mat[4] * pIn->mat[8] - pIn->mat[5] * pIn->mat[7];
     pOut->mat[1] = pIn->mat[2] * pIn->mat[7] - pIn->mat[1] * pIn->mat[8];
@@ -82,7 +82,7 @@ kmMat3* const kmMat3Adjugate(kmMat3* pOut, const kmMat3* pIn)
     return pOut;
 }
 
-kmMat3* const kmMat3Inverse(kmMat3* pOut, const kmScalar pDeterminate, const kmMat3* pM)
+kmMat3* kmMat3Inverse(kmMat3* pOut, const kmScalar pDeterminate, const kmMat3* pM)
 {
     kmScalar detInv;
     kmMat3 adjugate;
@@ -101,7 +101,7 @@ kmMat3* const kmMat3Inverse(kmMat3* pOut, const kmScalar pDeterminate, const kmM
 }
 
 /** Returns true if pIn is an identity matrix */
-const int kmMat3IsIdentity(const kmMat3* pIn)
+ int kmMat3IsIdentity(const kmMat3* pIn)
 {
 	static const float identity [] = { 	1.0f, 0.0f, 0.0f,
 										0.0f, 1.0f, 0.0f,
@@ -111,7 +111,7 @@ const int kmMat3IsIdentity(const kmMat3* pIn)
 }
 
 /** Sets pOut to the transpose of pIn, returns pOut */
-kmMat3* const kmMat3Transpose(kmMat3* pOut, const kmMat3* pIn)
+kmMat3* kmMat3Transpose(kmMat3* pOut, const kmMat3* pIn)
 {
     int z, x;
     for (z = 0; z < 3; ++z) {
@@ -124,7 +124,7 @@ kmMat3* const kmMat3Transpose(kmMat3* pOut, const kmMat3* pIn)
 }
 
 /* Multiplies pM1 with pM2, stores the result in pOut, returns pOut */
-kmMat3* const kmMat3Multiply(kmMat3* pOut, const kmMat3* pM1, const kmMat3* pM2)
+kmMat3* kmMat3Multiply(kmMat3* pOut, const kmMat3* pM1, const kmMat3* pM2)
 {
 	float mat[9];
 
@@ -147,7 +147,7 @@ kmMat3* const kmMat3Multiply(kmMat3* pOut, const kmMat3* pM1, const kmMat3* pM2)
 	return pOut;
 }
 
-kmMat3* const kmMat3ScalarMultiply(kmMat3* pOut, const kmMat3* pM, const kmScalar pFactor)
+kmMat3* kmMat3ScalarMultiply(kmMat3* pOut, const kmMat3* pM, const kmScalar pFactor)
 {
     float mat[9];
     int i;
@@ -163,7 +163,7 @@ kmMat3* const kmMat3ScalarMultiply(kmMat3* pOut, const kmMat3* pM, const kmScala
 }
 
 /** Assigns the value of pIn to pOut */
-kmMat3* const kmMat3Assign(kmMat3* pOut, const kmMat3* pIn)
+kmMat3* kmMat3Assign(kmMat3* pOut, const kmMat3* pIn)
 {
 	assert(pOut != pIn); //You have tried to self-assign!!
 
@@ -173,7 +173,7 @@ kmMat3* const kmMat3Assign(kmMat3* pOut, const kmMat3* pIn)
 }
 
 /** Returns true if the 2 matrices are equal (approximately) */
-const int kmMat3AreEqual(const kmMat3* pMat1, const kmMat3* pMat2)
+ int kmMat3AreEqual(const kmMat3* pMat1, const kmMat3* pMat2)
 {
 	int i;
 	if (pMat1 == pMat2) {
@@ -191,7 +191,7 @@ const int kmMat3AreEqual(const kmMat3* pMat1, const kmMat3* pMat2)
 }
 
 /* Rotation around the z axis so everything stays planar in XY */
-kmMat3* const kmMat3Rotation(kmMat3* pOut, const float radians)
+kmMat3* kmMat3Rotation(kmMat3* pOut, const float radians)
 {
 	/*
          |  cos(A)  -sin(A)   0  |
@@ -215,7 +215,7 @@ kmMat3* const kmMat3Rotation(kmMat3* pOut, const float radians)
 }
 
 /** Builds a scaling matrix */
-kmMat3* const kmMat3Scaling(kmMat3* pOut, const kmScalar x, const kmScalar y)
+kmMat3* kmMat3Scaling(kmMat3* pOut, const kmScalar x, const kmScalar y)
 {
 //	memset(pOut->mat, 0, sizeof(float) * 9);
 	kmMat3Identity(pOut);
@@ -225,7 +225,7 @@ kmMat3* const kmMat3Scaling(kmMat3* pOut, const kmScalar x, const kmScalar y)
 	return pOut;
 }
 
-kmMat3* const kmMat3Translation(kmMat3* pOut, const kmScalar x, const kmScalar y)
+kmMat3* kmMat3Translation(kmMat3* pOut, const kmScalar x, const kmScalar y)
 {
 //    memset(pOut->mat, 0, sizeof(float) * 9);
 	kmMat3Identity(pOut);
@@ -237,7 +237,7 @@ kmMat3* const kmMat3Translation(kmMat3* pOut, const kmScalar x, const kmScalar y
 }
 
 
-kmMat3* const kmMat3RotationQuaternion(kmMat3* pOut, const kmQuaternion* pIn)
+kmMat3* kmMat3RotationQuaternion(kmMat3* pOut, const kmQuaternion* pIn)
 {
     if (!pIn || !pOut) {
 	return NULL;
@@ -261,7 +261,7 @@ kmMat3* const kmMat3RotationQuaternion(kmMat3* pOut, const kmQuaternion* pIn)
     return pOut;
 }
 
-kmMat3* const kmMat3RotationAxisAngle(kmMat3* pOut, const struct kmVec3* axis, kmScalar radians)
+kmMat3* kmMat3RotationAxisAngle(kmMat3* pOut, const struct kmVec3* axis, kmScalar radians)
 {
     float rcos = cosf(radians);
     float rsin = sinf(radians);
@@ -281,7 +281,7 @@ kmMat3* const kmMat3RotationAxisAngle(kmMat3* pOut, const struct kmVec3* axis, k
     return pOut;
 }
 
-kmVec3* const kmMat3RotationToAxisAngle(kmVec3* pAxis, kmScalar* radians, const kmMat3* pIn)
+kmVec3* kmMat3RotationToAxisAngle(kmVec3* pAxis, kmScalar* radians, const kmMat3* pIn)
 {
     /*Surely not this easy?*/
     kmQuaternion temp;
@@ -293,7 +293,7 @@ kmVec3* const kmMat3RotationToAxisAngle(kmVec3* pAxis, kmScalar* radians, const 
 /**
  * Builds an X-axis rotation matrix and stores it in pOut, returns pOut
  */
-kmMat3* const kmMat3RotationX(kmMat3* pOut, const float radians)
+kmMat3* kmMat3RotationX(kmMat3* pOut, const float radians)
 {
 	/*
 		 |  1  0       0      |
@@ -321,7 +321,7 @@ kmMat3* const kmMat3RotationX(kmMat3* pOut, const float radians)
  * Builds a rotation matrix using the rotation around the Y-axis
  * The result is stored in pOut, pOut is returned.
  */
-kmMat3* const kmMat3RotationY(kmMat3* pOut, const float radians)
+kmMat3* kmMat3RotationY(kmMat3* pOut, const float radians)
 {
 	/*
 	     |  cos(A)  0   sin(A) |
@@ -348,7 +348,7 @@ kmMat3* const kmMat3RotationY(kmMat3* pOut, const float radians)
  * Builds a rotation matrix around the Z-axis. The resulting
  * matrix is stored in pOut. pOut is returned.
  */
-kmMat3* const kmMat3RotationZ(kmMat3* pOut, const float radians)
+kmMat3* kmMat3RotationZ(kmMat3* pOut, const float radians)
 {
 	/*
 	     |  cos(A)  -sin(A)   0  |
